@@ -1,53 +1,78 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
+*$py.class
 
-# C extensions
-*.so
+# Virtual environment
+venv/
+.env/
+ENV/
+env.bak/
+venv.bak/
 
-# Distribution / packaging
-.Python
-env/
-build/
-develop-eggs/
-dist/
-eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-*.egg-info/
-.installed.cfg
-*.egg
-.eggs/
+# Django stuff:
+*.log
+*.pot
+*.pyc
+*.pyo
+*.pyd
+db.sqlite3
+db.sqlite3-journal
+media/
+staticfiles/
+static/
+local_settings.py
+.settings/
 
-# Installer logs
-pip-log.txt
-pip-delete-this-directory.txt
+# Coverage reports
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
 
-# Pycharm project files
+# Test and debug-related
+test-results/
+*.mo
+debug.log
+
+# VSCode or IDE settings
+.vscode/
 .idea/
 
-# PyTest cache
-.pytest_cache/
-
-# Coverage
-.coverage
-coverage.xml
-
-# Tox
-.tox/
-.cache/
-.python-version
-
-# VirtualEnv
-.venv/
-
-# Developers
-*.sw*
-manage.py
+# OS files
 .DS_Store
+Thumbs.db
 
-# example database
-drf_example
+# Pipenv and poetry
+Pipfile.lock
+poetry.lock
+
+# Docker files (if you're using Docker)
+*.pid
+*.pid.lock
+__docker_build__/
+*.tar
+
+# Node/npm stuff (if using JS tooling)
+node_modules/
+*.lock
+
+# Migrations (optional - depends if you want to track)
+# Comment this if you want migrations in git
+# **/migrations/
+# !**/migrations/__init__.py
+
+# Celery
+celerybeat-schedule
+celerybeat.pid
+
+# Gunicorn
+gunicorn.pid
+
+# Pytest cache
+.pytest_cache/
