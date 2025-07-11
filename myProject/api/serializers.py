@@ -1,6 +1,6 @@
 
 from rest_framework import serializers
-from .models import Car,WheelForm, WheelField
+from .models import Car,WheelForm, WheelField, bogieDetailsForm, bogieChecksheetForm, bmbcChecksheetForm ,bogieForm
 
 class CarSerializer(serializers.ModelSerializer):
     class Meta:
@@ -41,3 +41,40 @@ class WheelFormSerializer(serializers.ModelSerializer):
             field_instance.save()
 
         return instance
+
+
+class bogieDetailsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = bogieDetailsForm
+        exclude = ['form']
+
+class bogieChecksheetSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = bogieChecksheetForm
+        exclude = ['form']
+
+class bmbcChecksheetSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = bmbcChecksheetForm
+        exclude = ['form']
+
+class bogieSerializer(serializers.ModelSerializer):
+    bogieDetails = bogieDetailsSerializer()
+    bogieChecksheet = bogieChecksheetSerializer()
+    bmbcChecksheet = bmbcChecksheetSerializer()
+
+    class Meta:
+        model = bogieForm
+        fields = ['form_number', 'submitted_by', 'submitted_date', 'bogieDetails', 'bogieChecksheet', 'bmbcChecksheet']
+
+    def create(self, validated_data):
+        bogie_details_data = validated_data.pop('bogieDetails')
+        bogie_checksheet_data = validated_data.pop('bogieChecksheet')
+        bmbc_checksheet_data = validated_data.pop('bmbcChecksheet')
+
+        form = bogieForm.objects.create(**validated_data)
+
+        bogieDetailsForm.objects.create(form=form, **bogie_details_data)
+        bogieChecksheetForm.objects.create(form=form, **bogie_checksheet_data)
+        bmbcChecksheetForm.objects.create(form=form, **bmbc_checksheet_data)
+        return form
